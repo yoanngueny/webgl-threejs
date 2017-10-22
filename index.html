@@ -1,0 +1,611 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>WebGL ThreeJS</title>
+    	<meta name="description" content="Presentation for a WebGL ThreeJS course at Gobelins Paris School">
+
+    	<meta property="og:title" content="WebGL ThreeJS">
+        <meta property="og:description" content="Presentation for a WebGL ThreeJS course at Gobelins Paris School">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="http://yoann-gueny.fr/talk/webgl-threejs/img/webgl.jpg">
+        <meta property="og:image:type" content="image/jpeg">
+        <meta property="og:image:width" content="808">
+        <meta property="og:image:height" content="541">
+        <meta property="og:site_name" content="Yoann Gueny">
+        <meta property="og:url" content="http://yoann-gueny.fr/talk/webgl-threejs/">
+
+	    <meta itemprop="name" content="WebGL ThreeJS">
+        <meta itemprop="description" content="Presentation for a WebGL ThreeJS course at Gobelins Paris School">
+        <meta itemprop="image" content="http://yoann-gueny.fr/talk/webgl-threejs/img/webgl.jpg">
+
+    	<meta name="twitter:card" content="summary" />
+    	<meta name="twitter:site" content="@yoanngueny" />
+    	<meta name="twitter:title" content="WebGL ThreeJS" />
+    	<meta name="twitter:description" content="Presentation for a WebGL ThreeJS course at Gobelins Paris School." />
+    	<meta name="twitter:image" content="http://yoann-gueny.fr/talk/webgl-threejs/img/webgl.jpg" />
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <style type="text/css">
+            img.logo-webgl {
+                width:1000px;
+                height:auto;
+                background:none !important;
+                border:none !important;
+                box-shadow:none !important;
+            }
+            p, li {
+                font-size: .7em !important;
+            }
+            .webgl {
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+            .source {
+                font-size: .4em !important;
+            }
+            img {
+                border: 1px solid #fff !important;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="webgl"></div>
+
+        <div class="reveal">
+            <div class="slides">
+
+                <section data-state="first" data-markdown>
+                    <script type="text/template">
+                        ![WebGL](img/webgl-logo.svg)<!-- .element: class="logo-webgl" -->
+                    </script>
+                </section>
+
+                <section data-state="webgl" data-markdown>
+                    <script type="text/template">
+                        ## REMINDER
+                        <br>
+                        WebGL is a cross-platform, royalty-free web standard for a low-level 3D graphics API based on OpenGL ES 2.0, exposed through the HTML5 Canvas element...
+
+                        Source : <!-- .element: class="source" -->[https://www.khronos.org/webgl/](https://www.khronos.org/webgl/)
+
+                        Note:
+                        - Rappel canvas.getContext(‘webgl’) similaire à canvas.getContext(‘2d’).
+                        - Déléguer une grande partie des calculs à la carte graphique
+                        - Trop bas niveau pour être utilisé tel quel
+                    </script>
+                </section>
+
+                <section data-state="threejs" data-markdown>
+                    <script type="text/template">
+                        ## Three.JS
+                        <br>
+                        JavaScript 3D Library which makes WebGL simpler.
+
+                        note:
+                        - Quels sont les dernières expériences webgl qui vous ont marqué ?
+                        - Faire installer le starter kit !
+                        TODO : créer le starter
+                    </script>
+                </section>
+
+                <section data-state="gettingStarted" data-markdown>
+                    <script type="text/template">
+                        ### Getting started
+                        <br>
+                        ```javascript
+                        let camera = new THREE.PerspectiveCamera(
+                            70, window.innerWidth / window.innerHeight, 0.01, 2 );
+                        camera.position.z = 1;
+                        ```
+                        <!-- .element: class="fragment" -->
+                        ```javascript
+                        let scene = new THREE.Scene();
+                        ```
+                        <!-- .element: class="fragment" -->
+                        ```javascript
+                        let geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
+                        let material = new THREE.MeshNormalMaterial();
+                        let mesh = new THREE.Mesh( geometry, material );
+                        scene.add( mesh );
+                        ```
+                        <!-- .element: class="fragment" -->
+                        ```javascript
+                        let renderer = new THREE.WebGLRenderer();
+                        renderer.setSize( window.innerWidth, window.innerHeight );
+                        document.body.appendChild( renderer.domElement );
+                        ```
+                        <!-- .element: class="fragment" -->
+                        ```javascript
+                        function animate() {
+                        	requestAnimationFrame( animate );
+                        	renderer.render( scene, camera );
+                        }
+                        animate();
+                        ```
+                        <!-- .element: class="fragment" -->
+
+                        note:
+                        - # Scene
+                        - Similaire au body d’une page HTML
+                        - Permet d'ajouter les éléments
+                        - # Renderer
+                        - Traite les informations de la scène et de la caméra pour afficher un rendu
+                        - D’autres renderer existent tel CanvasRenderer
+                    </script>
+                </section>
+
+                <section data-state="gettingStartedMesh" data-markdown>
+                    <script type="text/template">
+                        <!-- only display mesh -->
+                    </script>
+                </section>
+
+                <section data-state="object3D" data-markdown>
+                    <script type="text/template">
+                        ## Object3D
+
+                        note:
+                        - Mesh étend Object3D
+                        - add, remove, visible, etc
+                    </script>
+                </section>
+
+                <section data-state="object3DRotation" data-markdown>
+                    <script type="text/template">
+                        ### Rotation
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        mesh.rotation.x += 0.01;
+                        mesh.rotation.y += 0.02;
+                        ```
+
+                        note:
+                        // TODO : quaternion ?
+                    </script>
+                </section>
+
+                <section data-state="object3DPosition" data-markdown>
+                    <script type="text/template">
+                        ### Position
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let time = Date.now() / 1000;
+                        mesh.position.x = Math.cos(time) * .3;
+                        mesh.position.y = Math.sin(time) * .3;
+                        ```
+
+                        note:
+
+                    </script>
+                </section>
+
+                <section data-state="object3DScale" data-markdown>
+                    <script type="text/template">
+                        ### Scale
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let time = Date.now() / 1000;
+                        mesh.scale.x = 1 + Math.cos(time) * .8;
+                        mesh.scale.y = 1 + Math.sin(time) * .8;
+                        ```
+
+                        note:
+
+                    </script>
+                </section>
+
+                <section data-state="camera" data-markdown>
+                    <script type="text/template">
+                        ## Camera
+
+                        note:
+                        - PerspectiveCamera utilisé la plupart du temps (réel)
+                        - D’autres caméras existent tel OrthographicCamera (aucune déformation selon l’angle de vue, mais surtout utilisé dans la 3D technique. Architecture, etc).
+                    </script>
+                </section>
+
+                <section data-state="cameraFOV" data-markdown>
+                    <script type="text/template">
+                        ### FOV
+                        (field of view)
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let camera = new THREE.PerspectiveCamera(75, width / height, 0.01, 2);
+                        ```
+                        note:
+                        - fov : angle d'ouverture de la caméra
+                        - aspect : le rapport largeur/hauteur
+                    </script>
+                </section>
+
+                <section data-state="cameraFOVLarge" data-markdown>
+                    <script type="text/template">
+                        ### FOV
+                        (field of view)
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let camera = new THREE.PerspectiveCamera(120, width / height, 0.01, 2);
+                        ```
+                    </script>
+                </section>
+
+                <section data-state="cameraFOVSmall" data-markdown>
+                    <script type="text/template">
+                        ### FOV
+                        (field of view)
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let camera = new THREE.PerspectiveCamera(30, width / height, 0.01, 2);
+                        ```
+                    </script>
+                </section>
+
+                <section data-state="cameraNear" data-markdown>
+                    <script type="text/template">
+                        ### Near
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let camera = new THREE.PerspectiveCamera(75, width / height, 1, 2);
+                        ```
+                        note:
+                        - near : la distance du plan proche
+                    </script>
+                </section>
+
+                <section data-state="cameraFar" data-markdown>
+                    <script type="text/template">
+                        ### Far
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let camera = new THREE.PerspectiveCamera(75, width / height, 0.01, 1);
+                        ```
+                        note:
+                        - far : la distance du plan éloigné
+                    </script>
+                </section>
+
+                <section  data-state="geometry" data-markdown>
+                    <script type="text/template">
+                        ## Geometry
+                    </script>
+                </section>
+
+                <section  data-state="geometrySphere" data-markdown>
+                    <script type="text/template">
+                        ### Sphere
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let geometry = new THREE.SphereGeometry( 0.2, 32, 32 );
+                        ```
+                    </script>
+                </section>
+
+                <section  data-state="geometryVertex" data-markdown>
+                    <script type="text/template">
+                        ### Vertex
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let geometry = new THREE.SphereGeometry( 0.2, 8, 8 );
+                        ```
+                    </script>
+                </section>
+
+                <section  data-state="geometryLoader" data-markdown>
+                    <script type="text/template">
+                        ### Loader
+                        <br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let loader = new THREE.OBJLoader();
+                        loader.load( 'teapot.obj', function ( object ) {
+                            scene.add( object );
+                        }, progressCallback, errorCallback);
+                        ```
+                    </script>
+                </section>
+
+                <section data-state="material" data-markdown>
+                    <script type="text/template">
+                        ## Material
+                        note:
+                        - Le matériaux permet de définir les couleurs de l’objet
+                        - Expliquer les spécificités de “ambient”, “diffuse“ et “specular” et leurs rapports avec la perception des matières.
+                        - Parler des autres types de maps (specularMap, aoMap, emissiveMap, etc).
+                        - TODO : rajouter StandardMaterial ?
+                    </script>
+                </section>
+
+                <section data-state="materialBasic" data-markdown>
+                    <script type="text/template">
+                        ### Basic
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let material = new THREE.MeshBasicMaterial({ color: 0x222222 });
+                        ```
+                    </script>
+                </section>
+
+                <section data-state="materialLambert" data-markdown>
+                    <script type="text/template">
+                        ### Lambert
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let material = new THREE.MeshLambertMaterial({ color: 0x222222,
+                            emissive: 0x000000 });
+                        ```
+                    </script>
+                </section>
+
+                <section data-state="materialPhong" data-markdown>
+                    <script type="text/template">
+                        ### Phong
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let material = new THREE.MeshLambertMaterial({ color: 0x222222,
+                            emissive: 0x000000, specular: 0x111111, shininess: 30 });
+                        ```
+                    </script>
+                </section>
+
+                <section data-state="materialShininess" data-markdown>
+                    <script type="text/template">
+                        ### Shininess
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let material = new THREE.MeshLambertMaterial({ color: 0x222222,
+                            emissive: 0x000000, specular: 0x111111, shininess: 100 });
+                        ```
+                    </script>
+                </section>
+
+                <section data-state="materialStandard" data-markdown>
+                    <script type="text/template">
+                        ### Standard
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let material = new THREE.MeshStandardMaterial({ color: 0x222222,
+                            roughness: .3, metalness: 0 });
+                        ```
+                    </script>
+                </section>
+
+                <section data-state="materialShading" data-markdown>
+                    <script type="text/template">
+                        ### Shading
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let material = new THREE.MeshLambertMaterial({ ...,
+                            shading: THREE.FlatShading });
+                        ```
+                    </script>
+                </section>
+
+                <section data-state="materialWireframe" data-markdown>
+                    <script type="text/template">
+                        ### Wireframe
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let material = new THREE.MeshLambertMaterial({ ...,
+                            wireframe: true });
+                        ```
+                    </script>
+                </section>
+
+                <section data-state="materialOpacity" data-markdown>
+                    <script type="text/template">
+                        ### Opacity
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let material = new THREE.MeshLambertMaterial({ ...,
+                            transparent: true, opacity: .2 });
+                        ```
+                    </script>
+                </section>
+
+                <section data-state="materialTexture" data-markdown>
+                    <script type="text/template">
+                        ### Texture (Map)
+                        <br><br><br>
+                        ![WebGL](img/ball.jpg)<!-- .element: style="width:15vw;margin-right:35vw;" -->
+                        <br><br>
+                        ```javascript
+                        let textureLoader = new THREE.TextureLoader();
+                        let texture = textureLoader.load('ball.jpg');
+                        let material = new THREE.MeshLambertMaterial({ ...,
+                            color: 0xffffff, map: texture });
+                        ```
+                    </script>
+                </section>
+
+                <section data-state="materialNormal" data-markdown>
+                    <script type="text/template">
+                        ### Normal Map
+                        <br><br><br>
+                        ![WebGL](img/ball_normal.jpg)<!-- .element: style="width:15vw;margin-right:35vw;" -->
+                        <br><br>
+                        ```javascript
+                        let textureLoader = new THREE.TextureLoader();
+                        let texture = textureLoader.load('ball_normal.jpg');
+                        let material = new THREE.MeshLambertMaterial({ ...,
+                            normalMap: texture, normalScale: new THREE.Vector2(1, 1) });
+                        ```
+                    </script>
+                </section>
+
+                <section data-state="materialEnvironment" data-markdown>
+                    <script type="text/template">
+                        ### Environment Map
+                        <br><br><br>
+                        ![WebGL](img/ball_env.jpg)<!-- .element: style="width:15vw;margin-right:35vw;" -->
+                        <br><br>
+                        ```javascript
+                        let urls = [ "posx.jpg", "negx.jpg", "posy.jpg", "negy.jpg", "posz.jpg", "negz.jpg" ];
+                        let texture = new THREE.CubeTextureLoader().load( urls );
+                        let material = new THREE.MeshLambertMaterial({ ...,
+                            envMap: texture, reflectivity: .08 });
+                        ```
+                    </script>
+                </section>
+
+                <section data-state="materialLight" data-markdown>
+                    <script type="text/template">
+                        ### Light Map
+                        <br><br><br>
+                        ![WebGL](img/ball_light.jpg)<!-- .element: style="width:15vw;margin-right:35vw;" -->
+                        <br><br>
+                        ```javascript
+                        let textureLoader = new THREE.TextureLoader();
+                        let texture = textureLoader.load('ball_light.jpg');
+                        let material = new THREE.MeshLambertMaterial({ ...,
+                            lightMap: texture, lightMapIntensity: 1 });
+                        geometry.faceVertexUvs[1] = geometry.faceVertexUvs[0]; // important !
+                        ```
+                    </script>
+                </section>
+
+                <section data-state="light" data-markdown>
+                    <script type="text/template">
+                        ## Light
+                        note:
+                    </script>
+                </section>
+
+                <section data-state="lightAmbient" data-markdown>
+                    <script type="text/template">
+                        ### Ambient Light
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let ambientLight = new THREE.AmbientLight( 0x505050 );
+                        scene.add( ambientLight );
+                        ```
+                        note:
+                        - parameters : color, intensity
+                    </script>
+                </section>
+
+                <section data-state="lightDirectional" data-markdown>
+                    <script type="text/template">
+                        ### Directional Light
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
+                        scene.add( directionalLight );
+                        ```
+                        note:
+                        - parameters : color, intensity
+                    </script>
+                </section>
+
+                <section data-state="lightPoint" data-markdown>
+                    <script type="text/template">
+                        ### Point Light
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let pointLight = new THREE.PointLight( 0xffffff, 1, 10 );
+                        scene.add( pointLight );
+                        ```
+                        note:
+                        - parameters : color, intensity, distance, decay
+                    </script>
+                </section>
+
+                <section data-state="lightSpot" data-markdown>
+                    <script type="text/template">
+                        ### Spot Light
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        ```javascript
+                        let spotLight = new THREE.SpotLight( 0xffffff, 1, 1, 0.3, 1 );
+                        scene.add( spotLight );
+                        ```
+                        note:
+                        - parameters : color, intensity, distance, angle, penumbra, decay
+                    </script>
+                </section>
+
+                <section data-markdown>
+                    <script type="text/template">
+                        ## Enjoy !
+
+                        [@yoanngueny](https://twitter.com/yoanngueny)
+                    </script>
+                </section>
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/teapot.js"></script>
+        <script src="js/TweenLite.min.js"></script>
+        <script src="js/easing/EasePack.min.js"></script>
+        <script src="js/reveal.js"></script>
+        <script src="js/three.min.js"></script>
+        <script src="js/OBJLoader.js"></script>
+        <script src="js/main.js"></script>
+
+        <script>
+
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+
+                width: 1200,
+                height: 800,
+
+                history: true,
+
+                transition: 'none',
+
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js' },
+                    { src: 'plugin/markdown/markdown.js' },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+                ]
+            });
+
+            Reveal.addEventListener( 'ready', function( e ) {
+
+                init();
+
+                onSlideChange(e.indexh, e.currentSlide.dataset.state, 'init', null)
+            } );
+
+            Reveal.addEventListener( 'slidechanged', function( e ) {
+
+                if (e.previousSlide) {
+
+                    if (e.previousSlide.className == 'future') {
+
+                        onSlideChange(e.indexh + 1, e.previousSlide.dataset.state, 'stop', 'backward');
+
+                        onSlideChange(e.indexh, e.currentSlide.dataset.state, 'start', 'backward');
+                    }
+                    else {
+
+                        onSlideChange(e.indexh - 1, e.previousSlide.dataset.state, 'stop', 'forward');
+
+                        onSlideChange(e.indexh, e.currentSlide.dataset.state, 'start', 'forward');
+                    }
+                }
+            } );
+        </script>
+    </body>
+</html>
