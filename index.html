@@ -359,7 +359,7 @@
                         ### Phong
                         <br><br><br><br><br><br><br><br><br><br><br>
                         ```javascript
-                        let material = new THREE.MeshLambertMaterial({ color: 0x222222,
+                        let material = new THREE.MeshPhongMaterial({ color: 0x222222,
                             emissive: 0x000000, specular: 0x111111, shininess: 30 });
                         ```
                     </script>
@@ -370,7 +370,7 @@
                         ### Shininess
                         <br><br><br><br><br><br><br><br><br><br><br>
                         ```javascript
-                        let material = new THREE.MeshLambertMaterial({ color: 0x222222,
+                        let material = new THREE.MeshPhongMaterial({ color: 0x222222,
                             emissive: 0x000000, specular: 0x111111, shininess: 100 });
                         ```
                     </script>
@@ -378,7 +378,7 @@
 
                 <section data-state="materialStandard" data-markdown>
                     <script type="text/template">
-                        ### Standard
+                        ### Standard (PBR)
                         <br><br><br><br><br><br><br><br><br><br><br>
                         ```javascript
                         let material = new THREE.MeshStandardMaterial({ color: 0x222222,
