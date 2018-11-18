@@ -89,7 +89,7 @@
 
                         Note:
                         - Rappel canvas.getContext(‘webgl’) similaire à canvas.getContext(‘2d’).
-                        - Déléguer une grande partie des calculs à la carte graphique
+                        - Déléguer une grande partie des calculs à la carte graphique (plus d'info cours shader)
                         - Trop bas niveau pour être utilisé tel quel
                     </script>
                 </section>
@@ -101,9 +101,9 @@
                         JavaScript 3D Library which makes WebGL simpler.
 
                         note:
+                        - Qui a déjà utilisé ThreeJS ?
                         - Quels sont les dernières expériences webgl qui vous ont marqué ?
                         - Faire installer le starter kit !
-                        TODO : créer le starter
                     </script>
                 </section>
 
@@ -144,12 +144,14 @@
                         <!-- .element: class="fragment" -->
 
                         note:
+                        - la caméra n'existe pas
                         - # Scene
                         - Similaire au body d’une page HTML
                         - Permet d'ajouter les éléments
                         - # Renderer
                         - Traite les informations de la scène et de la caméra pour afficher un rendu
                         - D’autres renderer existent tel CanvasRenderer
+                        - S'occupe de discuter avec la carte graphique
                     </script>
                 </section>
 
@@ -179,6 +181,7 @@
                         ```
 
                         note:
+                        - rappel vecteur
                         // TODO : quaternion ?
                     </script>
                 </section>
@@ -210,6 +213,14 @@
 
                         note:
 
+                    </script>
+                </section>
+
+                <section data-state="object3DTP" data-markdown>
+                    <script type="text/template">
+                        ### Practice 1
+                        note:
+                        - dupliquer et répartir des cubes dans l'espace, puis les animés
                     </script>
                 </section>
 
@@ -283,6 +294,14 @@
                     </script>
                 </section>
 
+                <section data-state="cameraTP" data-markdown>
+                    <script type="text/template">
+                        ### Practice 2
+                        note:
+                        - créer des déplacement de caméra autour des cubes
+                    </script>
+                </section>
+
                 <section  data-state="geometry" data-markdown>
                     <script type="text/template">
                         ## Geometry
@@ -322,6 +341,14 @@
                     </script>
                 </section>
 
+                <section data-state="geometryTP" data-markdown>
+                    <script type="text/template">
+                        ### Practice 3
+                        note:
+                        - mettre des formes différents aux objets
+                    </script>
+                </section>
+
                 <section data-state="material" data-markdown>
                     <script type="text/template">
                         ## Material
@@ -329,7 +356,6 @@
                         - Le matériaux permet de définir les couleurs de l’objet
                         - Expliquer les spécificités de “ambient”, “diffuse“ et “specular” et leurs rapports avec la perception des matières.
                         - Parler des autres types de maps (specularMap, aoMap, emissiveMap, etc).
-                        - TODO : rajouter StandardMaterial ?
                     </script>
                 </section>
 
@@ -384,6 +410,9 @@
                         let material = new THREE.MeshStandardMaterial({ color: 0x222222,
                             roughness: .3, metalness: 0 });
                         ```
+                        - au lieu de régler le matériaux pour réagir à une certaine lumière
+                        - le materiaux est régler pour réagir correctement à n'importe quel lumière
+                        - un peu plus consomateur
                     </script>
                 </section>
 
@@ -393,7 +422,7 @@
                         <br><br><br><br><br><br><br><br><br><br><br>
                         ```javascript
                         let material = new THREE.MeshLambertMaterial({ ...,
-                            shading: THREE.FlatShading });
+                            flatShading: true });
                         ```
                     </script>
                 </section>
@@ -478,6 +507,14 @@
                             lightMap: texture, lightMapIntensity: 1 });
                         geometry.faceVertexUvs[1] = geometry.faceVertexUvs[0]; // important !
                         ```
+                    </script>
+                </section>
+
+                <section data-state="materialTP" data-markdown>
+                    <script type="text/template">
+                        ### Practice 4
+                        note:
+                        - créer des matériaux pour les objets (montrer directionnal light rapidement)
                     </script>
                 </section>
 
